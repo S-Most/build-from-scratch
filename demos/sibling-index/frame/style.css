@@ -1,0 +1,47 @@
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .controls {
+            margin-top: 3rem;
+        }
+
+        .card-stack {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .note {
+            position: absolute;
+            width: 140px;
+            height: 140px;
+            background: #fff9c4;
+            border: 2px solid #333;
+            padding: 1rem;
+            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            text-align: center;
+            color: #333;
+
+            /* Fan out rotation based on index and total count */
+            rotate: calc((sibling-index() - (sibling-count() / 2) - 0.5) * 12deg);
+
+            /* Push the outer cards down slightly into an arc */
+            transform: translateY(calc(abs(sibling-index() - (sibling-count() / 2) - 0.5) * 8px));
+
+            /* Z-index so they stack correctly */
+            z-index: sibling-index();
+
+            /* Dynamic pastel colors based on index */
+            background-color: hsl(360 calc(mod(sibling-index() * 40, 360) * 1%) 85%);
+        }

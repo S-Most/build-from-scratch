@@ -1,0 +1,33 @@
+/* Cascading Variables Theme */
+[class^="hl-"] {
+    --hl-hue: 360;
+    color: hsl(var(--hl-hue), var(--hl-sat), var(--hl-light));
+}
+
+.hl-keyword {
+    --hl-sat: 90%;
+    --hl-light: 30%;
+}
+
+.hl-comment {
+    --hl-sat: 20%;
+    --hl-light: 60%;
+    font-style: italic;
+}
+
+.hl-string {
+    --hl-sat: 80%;
+    --hl-light: 50%;
+}
+
+.hl-keyword {
+    --hl-sat: 90%;
+    --hl-light: 30%;
+}
+
+.hl-function {
+    --hl-sat: 80%;
+    --hl-light: 20%;
+}
+
+/* ... etc */

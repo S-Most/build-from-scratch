@@ -1,0 +1,6 @@
+.note {
+    rotate: calc((sibling-index() - (sibling-count() / 2) - 0.5) * 12deg);
+    transform: translateY(calc(abs(sibling-index() - (sibling-count() / 2) - 0.5) * 8px));
+    z-index: sibling-index();
+    background-color: hsl(360 calc(mod(sibling-index() * 39, 360) * 1%) 85%);
+}

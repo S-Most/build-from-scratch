@@ -1,0 +1,55 @@
+[class^="hl-"] {
+    --hl-hue: 360;
+    color: hsl(var(--hl-hue), var(--hl-sat), var(--hl-light));
+}
+
+.hl-comment {
+    --hl-sat: 20%;
+    --hl-light: 60%;
+    font-style: italic;
+}
+
+.hl-string {
+    --hl-sat: 80%;
+    --hl-light: 50%;
+}
+
+.hl-keyword {
+    --hl-sat: 90%;
+    --hl-light: 30%;
+}
+
+.hl-function {
+    --hl-sat: 80%;
+    --hl-light: 20%;
+}
+
+.hl-number {
+    --hl-sat: 95%;
+    --hl-light: 45%;
+}
+
+.hl-tag {
+    --hl-sat: 60%;
+    --hl-light: 18%;
+}
+
+.hl-attribute {
+    --hl-sat: 65%;
+    --hl-light: 30%;
+}
+
+.hl-selector {
+    --hl-sat: 50%;
+    --hl-light: 15%;
+}
+
+.hl-property {
+    --hl-sat: 85%;
+    --hl-light: 25%;
+}
+
+.hl-value {
+    --hl-sat: 60%;
+    --hl-light: 50%;
+}
