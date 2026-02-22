@@ -202,20 +202,20 @@ code {
     overflow-x: auto;
     overflow-y: hidden;
     position: relative;
-    z-index: 1;
+    z-index: 2;
 }
 
 .code-tab-bar::after {
     content: "";
     position: absolute;
-    bottom: 0;
+    bottom: 0px;
     left: 0;
     right: 0;
     height: 2px;
     background: #333;
     pointer-events: none;
     filter: url(#hand-drawn);
-    z-index: -1;
+    z-index: 1; /* Paint above the tab-bar background */
 }
 
 .code-tab {
@@ -223,10 +223,11 @@ code {
     font-size: 0.8rem;
     font-family: inherit;
     border: none;
-    background: #fff;
+    background: transparent;
     font-weight: bold;
     cursor: default;
     position: relative;
+    z-index: 1;
 }
 
 .code-tab::after {
@@ -239,7 +240,14 @@ code {
     background: #333;
     pointer-events: none;
     filter: url(#hand-drawn);
-    z-index: 1;
+    z-index: 2;
+}
+
+.code-tab.active {
+    background: #fafafa; /* Match Paper */
+    z-index: 3; /* Paint over the tab-bar boundary line */
+    border-bottom: 2px solid #fafafa;
+    margin-bottom: -2px;
 }
 
 .code-tab-container pre {
@@ -282,6 +290,13 @@ code {
     margin-right: 15px;
     color: #999;
     user-select: none;
+}
+
+@media (max-width: 600px) {
+    .code-tab-container pre {
+        padding: 10px 10px 10px 0;
+        font-size: 0.75rem;
+    }
 }
 
 .grid-container {

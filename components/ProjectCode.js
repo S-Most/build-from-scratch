@@ -74,20 +74,20 @@ class ProjectCode extends HTMLElement {
             background: #f0f4f8;
             padding: 8px 16px;
             position: relative;
-            z-index: 1;
+            z-index: 3;
           }
 
           .mobile-nav::after {
             content: "";
             position: absolute;
-            bottom: -2px;
+            bottom: 0px;
             left: 0;
             right: 0;
             height: 2px;
             background: #333;
             pointer-events: none;
             filter: url(#hand-drawn);
-            z-index: -1;
+            z-index: 1;
           }
 
           .mobile-toggle {
@@ -113,7 +113,7 @@ class ProjectCode extends HTMLElement {
             border-radius: 4px;
             pointer-events: none;
             filter: url(#hand-drawn);
-            z-index: -1;
+            z-index: 1;
           }
 
           .hamburger {
@@ -138,7 +138,7 @@ class ProjectCode extends HTMLElement {
             overflow-x: auto;
             overflow-y: hidden;
             position: relative;
-            z-index: 1;
+            z-index: 2;
           }
 
           .tab-bar::after {
@@ -151,7 +151,7 @@ class ProjectCode extends HTMLElement {
             background: #333;
             pointer-events: none;
             filter: url(#hand-drawn);
-            z-index: -1;
+            z-index: 1;
           }
 
           .tab {
@@ -179,8 +179,11 @@ class ProjectCode extends HTMLElement {
           }
 
           .tab.active {
-            background: #fff;
+            background: #fafafa;
             font-weight: bold;
+            z-index: 3;
+            border-bottom: 2px solid #fafafa;
+            margin-bottom: -2px;
           }
 
           pre {
@@ -266,7 +269,7 @@ class ProjectCode extends HTMLElement {
             }
             pre {
               font-size: 0.75rem;
-              padding: 10px;
+              padding: 10px 10px 10px 0;
             }
           }
         </style>
