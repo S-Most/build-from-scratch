@@ -107,8 +107,8 @@ footer {
 }
 
 .line {
-    margin-inline: 20vw;
-    width: 60vw;
+    margin-inline: auto;
+    width: 80%;
     border-bottom: 2px solid var(--underline);
     filter: url(#hand-drawn);
 }

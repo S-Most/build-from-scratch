@@ -92,6 +92,13 @@ const parseImages = (str) => {
   });
 };
 
+const parseAnnotations = (str) => {
+  const regex = /_([^_]+)_([^_]+)_/g;
+  return str.replace(regex, (match, word, annotation) => {
+    return `<hand-annotation text="${annotation}">${word}</hand-annotation>`;
+  });
+};
+
 const parseCodeBlocks = (str) => {
   const regex = /```(\w+)\n([\s\S]*?)```/gm;
   return str.replace(regex, (match, language, code) => {
@@ -128,6 +135,7 @@ const parseMarkdown = composeParser(
   parseHeaders,
   parseCustomElements,
   parseImages,
+  parseAnnotations,
   parseHorizontalRules,
   parseLists,
   parseBold,

@@ -13,11 +13,11 @@ The absolute best way to demystify complex technology is to break it down to its
 
 ### Walking the Walk
 
-I don't just talk about building from scratch; I live it. This entire platform is a testament to that philosophy.
+I don't just talk about building from scratch; I live it. This entire _platform_I mean this website_ is a testament to that philosophy.
 
 There are no massive markdown libraries or heavy third-party syntax highlighting plugins powering these pages. The custom markdown parser seamlessly converting this text into HTML? Built from scratch. The robust, multi-pass, dynamically themed syntax highlighter carefully styling the code blocks? Also built from scratch.
 
-By building my own tooling, I ensure that every single layer of the stack is fully understood, optimized, and tailored precisely for this project.
+By building my own tooling, I ensure that every single layer of the stack is _fully understood_from top to bottom_, optimized, and tailored precisely for this project.
 
 ### What to Expect
 

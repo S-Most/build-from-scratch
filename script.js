@@ -1,6 +1,7 @@
 import { parseMarkdown, extractMetadata } from "./utils/parser.js";
 import "./components/ProjectCode.js";
 import "./components/PostMeta.js";
+import "./components/HandAnnotation.js";
 
 const posts = [
   "posts/game-of-life.md",
