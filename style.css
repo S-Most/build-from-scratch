@@ -142,6 +142,9 @@ code {
     padding: 0.2rem 0.4rem;
     font-size: 0.85em;
     border-radius: 4px;
+}
+
+p code {
     break-inside: avoid;
     white-space: nowrap;
 }
@@ -217,7 +220,8 @@ code {
     background: #333;
     pointer-events: none;
     filter: url(#hand-drawn);
-    z-index: 1; /* Paint above the tab-bar background */
+    z-index: 1;
+    /* Paint above the tab-bar background */
 }
 
 .code-tab {
@@ -246,8 +250,10 @@ code {
 }
 
 .code-tab.active {
-    background: #fafafa; /* Match Paper */
-    z-index: 3; /* Paint over the tab-bar boundary line */
+    background: #fafafa;
+    /* Match Paper */
+    z-index: 3;
+    /* Paint over the tab-bar boundary line */
     border-bottom: 2px solid #fafafa;
     margin-bottom: -2px;
 }
