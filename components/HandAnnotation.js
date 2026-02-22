@@ -18,7 +18,7 @@ class HandAnnotation extends HTMLElement {
           font-weight: bold;
           color: #e74c3c;
           padding: 2px 6px;
-          cursor: pointer;
+        //   cursor: pointer;
           anchor-name: --annotation-word;
         }
 
