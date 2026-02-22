@@ -1,3 +1,42 @@
+import { highlight } from "./highlight.js";
+
+const extractMetadata = (str) => {
+  const metaRegex = /^---\r?\n([\s\S]*?)\r?\n---\r?\n*/;
+  const match = str.match(metaRegex);
+  const meta = {};
+
+  if (match) {
+    const lines = match[1].split(/\r?\n/);
+    lines.forEach(line => {
+      const [key, ...values] = line.split(':');
+      if (key) {
+        meta[key.trim()] = values.join(':').trim();
+      }
+    });
+    return {
+      meta,
+      content: str.replace(metaRegex, '').trim()
+    };
+  }
+
+  return { meta, content: str };
+};
+
+const parseMetaBlock = (str) => {
+  const metaRegex = /^---\r?\n([\s\S]*?)\r?\n---\r?\n*/;
+  return str.replace(metaRegex, (match, metaStr) => {
+    const meta = {};
+    const lines = metaStr.split(/\r?\n/);
+    lines.forEach(line => {
+      const [key, ...values] = line.split(':');
+      if (key) {
+        meta[key.trim()] = values.join(':').trim();
+      }
+    });
+    return `<post-meta title="${meta.title || ''}" type="${meta.type || ''}" date="${meta.date || ''}" description="${meta.description || ''}"></post-meta>\n\n`;
+  });
+};
+
 const parseHeaders = (str) => {
   return str
     .replace(/^### (.*$)/gim, "<h3>$1</h3>")
@@ -14,7 +53,7 @@ const parseCustomElements = (str) => {
 };
 
 const parseHorizontalRules = (str) => {
-  return str.replace(/^---$/gim, '<hr class="line">');
+  return str.replace(/^---$/gim, '<div class="line"></div>');
 };
 
 const parseLists = (str) => {
@@ -43,6 +82,28 @@ const parseInlineCode = (str) =>
     return `<code>${escaped}</code>`;
   });
 
+const parseImages = (str) => {
+  const regex = /\[([^\]]+\.(?:png|jpg|jpeg|gif|svg|webp))\]/gi;
+  return str.replace(regex, (match, filename) => {
+    return `<div class="image-container">
+      <img class="sketched-filter" src="static/${filename}" alt="${filename}">
+      <div class="overlay sketched-filter"></div>
+    </div>`;
+  });
+};
+
+const parseCodeBlocks = (str) => {
+  const regex = /```(\w+)\n([\s\S]*?)```/gm;
+  return str.replace(regex, (match, language, code) => {
+    return `<div class="code-tab-container">
+      <div class="code-tab-bar">
+        <button class="code-tab active">${language}</button>
+      </div>
+      <pre><code>${highlight(code, language)}</code></pre>
+    </div>`;
+  });
+};
+
 const parseParagraphs = (str) => {
   return str
     .trim()
@@ -62,8 +123,11 @@ const composeParser =
       fns.reduce((content, fn) => fn(content), initialContent);
 
 const parseMarkdown = composeParser(
+  parseMetaBlock,
+  parseCodeBlocks,
   parseHeaders,
   parseCustomElements,
+  parseImages,
   parseHorizontalRules,
   parseLists,
   parseBold,
@@ -72,4 +136,4 @@ const parseMarkdown = composeParser(
   parseParagraphs
 );
 
-export { parseMarkdown };
+export { parseMarkdown, extractMetadata };

@@ -1,4 +1,9 @@
-# Building a Robust Syntax Highlighter
+---
+title: Building a Robust Syntax Highlighter
+type: project
+date: 2026-02-21
+description: Syntax highlighting is notoriously difficult because regular expressions love to overlap and corrupt each other.
+---
 
 Syntax highlighting is notoriously difficult because regular expressions love to overlap and corrupt each other. If one pass wraps a keyword in a `<span class="hl-keyword">`, a subsequent pass searching for strings might accidentally match the `"hl-keyword"` attribute itself!
 

@@ -50,10 +50,21 @@ class ProjectCode extends HTMLElement {
             margin-bottom: 2rem;
             font-family: 'JetBrains Mono', monospace;
           }
-          
+
           .container {
-            border: 2px solid #333;
             background: #fff;
+            position: relative;
+            z-index: 0;
+          }
+
+          .container::before {
+            content: "";
+            position: absolute;
+            inset: -2px;
+            border: 2px solid #333;
+            pointer-events: none;
+            filter: url(#hand-drawn);
+            z-index: -1;
           }
 
           .mobile-nav {
@@ -61,13 +72,27 @@ class ProjectCode extends HTMLElement {
             justify-content: space-between;
             align-items: center;
             background: #f0f4f8;
-            border-bottom: 2px solid #333;
             padding: 8px 16px;
+            position: relative;
+            z-index: 1;
+          }
+
+          .mobile-nav::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #333;
+            pointer-events: none;
+            filter: url(#hand-drawn);
+            z-index: -1;
           }
 
           .mobile-toggle {
             background: none;
-            border: 1px solid #333;
+            border: none;
             border-radius: 4px;
             padding: 4px 8px;
             cursor: pointer;
@@ -76,6 +101,19 @@ class ProjectCode extends HTMLElement {
             align-items: center;
             gap: 8px;
             font-size: 0.8rem;
+            position: relative;
+            z-index: 1;
+          }
+
+          .mobile-toggle::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border: 1px solid #333;
+            border-radius: 4px;
+            pointer-events: none;
+            filter: url(#hand-drawn);
+            z-index: -1;
           }
 
           .hamburger {
@@ -95,39 +133,95 @@ class ProjectCode extends HTMLElement {
 
           .tab-bar {
             display: flex;
-            border-bottom: 2px solid #333;
+            gap: 2px;
             background: #f0f4f8;
             overflow-x: auto;
+            overflow-y: hidden;
+            position: relative;
+            z-index: 1;
+          }
+
+          .tab-bar::after {
+            content: "";
+            position: absolute;
+            bottom: 0px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #333;
+            pointer-events: none;
+            filter: url(#hand-drawn);
+            z-index: -1;
           }
 
           .tab {
             padding: 8px 16px;
             cursor: pointer;
-            border-right: 1px solid #333;
             font-size: 0.8rem;
             font-family: inherit;
-            border-top: none;
-            border-bottom: none;
-            border-left: none;
+            border: none;
             background: transparent;
+            position: relative;
+            z-index: 1;
+          }
+
+          .tab::after {
+            content: "";
+            position: absolute;
+            right: -1px;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: #333;
+            pointer-events: none;
+            filter: url(#hand-drawn);
+            z-index: 2;
           }
 
           .tab.active {
-            position: relative;
             background: #fff;
             font-weight: bold;
           }
 
           pre {
             margin: 0;
-            padding: 15px;
-            max-height: 300px;
+            padding: 15px 15px 15px 0; /* Align with blue lines */
+            max-height: 400px;
             overflow: auto;
             font-size: 0.9rem;
-            line-height: 1.5;
-            background: #fafafa;
-            white-space: pre-wrap;
+
+            /* Lined Paper styling */
+            line-height: 1.5rem;
+            background-color: #fafafa;
+            background-image:
+                linear-gradient(90deg, transparent 38px, #ff8c8c 38px, #ff8c8c 40px, transparent 40px),
+                linear-gradient(to bottom, transparent calc(1.5rem - 1px), #a3d5ff calc(1.5rem - 1px));
+            background-size: 100% 1.5rem;
+            background-attachment: local;
+            background-position: left top, left 10px;
+
+            white-space: pre; /* No wrapping on lined paper */
             word-break: break-all;
+            color: #000;
+            position: relative;
+            z-index: 1;
+            counter-reset: line;
+          }
+
+          .line-num::before {
+            counter-increment: line;
+            content: counter(line);
+            display: inline-block;
+            width: 30px;
+            text-align: right;
+            margin-right: 15px;
+            color: #999;
+            user-select: none;
+          }
+
+          #output {
+            position: relative;
+            z-index: 1;
           }
 
           .container ::-webkit-scrollbar {
@@ -152,10 +246,23 @@ class ProjectCode extends HTMLElement {
               display: flex;
             }
             .tab {
-              border-right: none;
-              border-bottom: 1px solid #ccc;
               text-align: left;
               width: 100%;
+            }
+            .tab::after {
+              display: none;
+            }
+            .tab::before {
+              content: "";
+              position: absolute;
+              bottom: -1px;
+              left: 0;
+              right: 0;
+              height: 1px;
+              background: #ccc;
+              pointer-events: none;
+              filter: url(#hand-drawn);
+              z-index: 1;
             }
             pre {
               font-size: 0.75rem;
@@ -164,6 +271,14 @@ class ProjectCode extends HTMLElement {
           }
         </style>
         <link rel="stylesheet" href="/utils/highlight.css">
+
+        <!-- local SVG filter definition so it applies inside the shadow DOM -->
+        <svg style="display: none;">
+          <filter id="hand-drawn" x="-8%" y="-10%" width="120%" height="120%">
+              <feTurbulence type="fractalNoise" baseFrequency="1.5" numOctaves="2" result="noise" />
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" />
+          </filter>
+        </svg>
 
         <div class="container">
           <div class="mobile-nav">
