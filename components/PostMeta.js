@@ -22,10 +22,12 @@ class PostMeta extends HTMLElement {
         }
 
         .meta-grid {
+          background: white;
           position: relative;
           display: grid;
           grid-template-columns: 80px 1fr 80px 1fr 80px 2fr;
           gap: 2px;
+          isolation: isolate;
         }
 
         .meta-grid::before {
@@ -174,7 +176,7 @@ class PostMeta extends HTMLElement {
         <div class="cell header">Drawn</div>
         <div class="cell value" style="font-family: 'Caveat'; font-size: 1.6rem;">S.A.</div>
         <div class="cell header">Scale</div>
-        <div class="cell value">1:1</div>
+        <div class="cell value" id="scale-value">1:100</div>
         <div class="cell header">Type</div>
         <div class="cell value">${type ? `<span class="badge">${type}</span>` : 'N/A'}</div>
 
@@ -193,6 +195,35 @@ class PostMeta extends HTMLElement {
         ` : ''}
       </div>
     `;
+
+    this.updateZoom = this.updateZoom.bind(this);
+    window.addEventListener("resize", this.updateZoom);
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("resize", this.updateZoom);
+    }
+
+    setTimeout(this.updateZoom, 0);
+  }
+
+  disconnectedCallback() {
+    window.removeEventListener("resize", this.updateZoom);
+    if (window.visualViewport) {
+      window.visualViewport.removeEventListener("resize", this.updateZoom);
+    }
+  }
+
+  updateZoom() {
+    const scaleEl = this.shadowRoot.getElementById("scale-value");
+    if (scaleEl) {
+      let zoom = Math.round((window.outerWidth / window.innerWidth) * 100);
+
+      if (window.visualViewport && window.visualViewport.scale > 1) {
+          zoom = Math.round((window.outerWidth / window.innerWidth) * window.visualViewport.scale * 100);
+      }
+
+      if (!zoom || zoom === Infinity) zoom = 100;
+      scaleEl.textContent = `1:${zoom}`;
+    }
   }
 }
 

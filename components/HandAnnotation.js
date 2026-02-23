@@ -11,13 +11,14 @@ class HandAnnotation extends HTMLElement {
         :host {
           display: inline;
           position: relative;
+          --color: #e74c3c;
         }
 
         .word {
           position: relative;
           display: inline-block;
           font-weight: bold;
-          color: #e74c3c;
+          color: var(--color);
           padding: 2px 6px;
           anchor-name: --annotation-word;
         }
@@ -33,7 +34,7 @@ class HandAnnotation extends HTMLElement {
 
         .highlight-circle path {
           fill: none;
-          stroke: #e74c3c;
+          stroke: var(--color);
           stroke-width: 2;
           filter: url(#hand-drawn);
         }
@@ -51,7 +52,7 @@ class HandAnnotation extends HTMLElement {
         .annotation-text {
           position: absolute;
           font-family: 'Caveat';
-          color: #e74c3c;
+          color: var(--color);
           font-weight: bold;
           font-size: 1.5rem;
           width: min-content;
@@ -73,7 +74,7 @@ class HandAnnotation extends HTMLElement {
         }
 
         svg.connector path {
-          stroke: #e74c3c;
+          stroke: var(--color);
           stroke-width: 1.5;
           fill: none;
           filter: url(#hand-drawn);
@@ -92,6 +93,7 @@ class HandAnnotation extends HTMLElement {
              z-index: 20;
              width: auto;
              height: auto;
+             filter: drop-shadow(0 4px 4px rgba(0,0,0,0.15));
            }
 
            :host(.active) .annotation-container {
@@ -101,17 +103,45 @@ class HandAnnotation extends HTMLElement {
            }
 
            .annotation-text {
-             position: static;
-             font-size: 0.85rem;
-             background: rgba(255, 255, 255, 0.95);
-             padding: 6px 12px;
-             border-radius: 6px;
+             position: relative;
+             font-size: 1.25rem;
+             padding: 8px 16px;
              text-align: center;
-             border: 2px solid #e74c3c;
-             rotate: 0deg;
-             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+             rotate: -1.5deg;
              width: max-content;
+             filter: none;
+             color: var(--color);
+             z-index: 1;
            }
+
+           .annotation-text::before {
+             content: "";
+             position: absolute;
+             inset: 0;
+             background: #f0faffff;
+             border: 2px solid var(--color);
+             pointer-events: none;
+             filter: url(#hand-drawn-3);
+             z-index: -1;
+           }
+
+           .annotation-text::after {
+             content: "";
+             position: absolute;
+             bottom: -6px;
+             left: 50%;
+             margin-left: -7px;
+             width: 12px;
+             height: 12px;
+             background: #fffdf0;
+             border-bottom: 2px solid var(--color);
+             border-right: 2px solid var(--color);
+             rotate: 45deg;
+             pointer-events: none;
+             filter: url(#hand-drawn-3);
+             z-index: -1;
+           }
+
            svg.connector {
              display: none;
            }
@@ -158,7 +188,6 @@ class HandAnnotation extends HTMLElement {
 
     window.addEventListener("resize", this.updateLayout);
 
-    // Attach click listeners for mobile behavior
     const wordSpan = this.shadowRoot.querySelector(".word");
     wordSpan.addEventListener("click", this.toggleMobileActive);
     document.addEventListener("click", this.handleOutsideClick);
@@ -168,21 +197,18 @@ class HandAnnotation extends HTMLElement {
 
   disconnectedCallback() {
     window.removeEventListener("resize", this.updateLayout);
-
-    // Clean up global click listener
     document.removeEventListener("click", this.handleOutsideClick);
   }
 
   toggleMobileActive(e) {
     if (window.innerWidth <= 1100) {
-      e.stopPropagation(); // Prevent the document listener from immediately closing it
+      e.stopPropagation();
       this.classList.toggle("active");
     }
   }
 
   handleOutsideClick(e) {
     if (window.innerWidth <= 1100 && this.classList.contains("active")) {
-      // If they click outside the host element, remove active class
       if (!this.contains(e.target)) {
         this.classList.remove("active");
       }
@@ -191,7 +217,6 @@ class HandAnnotation extends HTMLElement {
 
   updateLayout() {
     if (window.innerWidth <= 1100) {
-      // Clear manual styles on mobile so Anchor Positioning takes over
       const textDiv = this.shadowRoot.querySelector(".annotation-text");
       textDiv.style.left = '';
       textDiv.style.right = '';
@@ -199,7 +224,6 @@ class HandAnnotation extends HTMLElement {
       return;
     }
 
-    // Unset active class on resize back to desktop
     this.classList.remove("active");
 
     const wordSpan = this.shadowRoot.querySelector(".word");

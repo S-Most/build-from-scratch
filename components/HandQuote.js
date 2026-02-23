@@ -35,7 +35,6 @@ class HandQuote extends HTMLElement {
           z-index: -1;
         }
 
-        /* Notebook paper lines */
         .quote-box::after {
           rotate: -3deg;
           content: "";
@@ -92,8 +91,15 @@ class HandQuote extends HTMLElement {
       <div class="quote-box">
         <div class="margin-line"></div>
         <p class="quote-text"><slot></slot></p>
-        <div class="quote-author">Written by ${author}</div>
+        <div class="quote-author">By: ${author}</div>
       </div>
+
+      <svg style="display: none;">
+        <filter id="hand-drawn-3" x="-8%" y="-10%" width="120%" height="120%">
+            <feTurbulence type="fractalNoise" baseFrequency="1.5" numOctaves="2" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" />
+        </filter>
+      </svg>
     `;
   }
 }
