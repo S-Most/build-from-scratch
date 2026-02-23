@@ -5,7 +5,7 @@ date: 2026-02-21
 description: To truly understand it, you must build it from scratch.
 ---
 
-*"To truly understand it, you must build it from scratch."*
+> To truly understand it, you must build it from scratch. | Me =D |
 
 This is the core philosophy behind this project. In modern web development, it is incredibly easy to get lost in an ocean of massive libraries, complex frameworks, and magical abstractions. But what happens under the hood? How do the tools we rely on every day actually work?
 
@@ -23,7 +23,7 @@ By building my own tooling, I ensure that every single layer of the stack is _fu
 
 Throughout the site, you will find custom `<project-code>` components embedded directly into the articles. These blocks allow you to effortlessly inspect the underlying source code in different file tabs. While not all of them do, many of these elements also feature a **Result** tab, providing a live rendered output that you can interact with!
 
-I already have interactive deep dives on creating **Conway's Game of Life** and exploiting the CSS **`sibling-index()`** function for dynamic layouts without JavaScript.
+I already have interactive deep dives on creating **Conway's Game of Life** and exploiting the CSS `sibling-index()` function for dynamic layouts without JavaScript.
 
 But the journey is just beginning. In the near future, I will be tackling even more ambitious subjects:
 - **Demystifying AI:** I will build a complete, functioning **Neural Network** from scratch to understand the math behind machine learning.

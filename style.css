@@ -1,8 +1,8 @@
 :root {
-    --bg-image: linear-gradient(rgba(0, 150, 255, 0.1) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 150, 255, 0.1) 1px, transparent 1px),
-        linear-gradient(rgba(0, 150, 255, 0.05) 0.5px, transparent 0.5px),
-        linear-gradient(90deg, rgba(0, 150, 255, 0.05) 0.5px, transparent 0.5px);
+    --bg-image: linear-gradient(rgba(0, 150, 255, 0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 150, 255, 0.15) 1px, transparent 1px),
+        linear-gradient(rgba(0, 150, 255, 0.08) 0.5px, transparent 0.5px),
+        linear-gradient(90deg, rgba(0, 150, 255, 0.08) 0.5px, transparent 0.5px);
     --bg-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
     --underline: hsl(360, 100%, 40%);
 }
@@ -10,6 +10,11 @@
 * {
     box-sizing: border-box;
     line-height: 1.5;
+}
+
+@font-face {
+    font-family: 'Caveat';
+    src: url('static/Caveat-VariableFont_wght.ttf') format('truetype');
 }
 
 body {
@@ -25,31 +30,54 @@ body {
 
 nav {
     position: relative;
-    padding-block: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 
     ul {
         display: flex;
         justify-content: center;
+        align-items: flex-start;
         gap: 1rem;
         width: 100%;
         list-style: none;
         margin-block: 0;
         padding-inline: 0;
 
-        a {
-            color: black;
+        li {
+            margin: 0;
+            padding: 0;
+            rotate: calc(((sibling-index() - 1) / sibling-count() - 0.5) * -10deg);
+            translate: 0 -0.8rem;
         }
-    }
 
-    &::after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        width: 60%;
-        border-bottom: 3px solid var(--underline);
-        margin-inline: 20%;
-        filter: url(#hand-drawn);
+        a {
+            display: inline-block;
+            padding-block: 1.5rem .5rem;
+            padding-inline: 1.2rem;
+            position: relative;
+
+            color: #222;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: 800;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            background-color: #e8ecf1;
+            border: 2px solid #222;
+            border-top: none;
+            border-bottom-left-radius: .5rem;
+            border-bottom-right-radius: .5rem;
+            filter: url(#hand-drawn-3);
+            transition: transform 0.2s ease, background-color 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        a:hover {
+            content: "";
+            transform: translateY(4px);
+            background-color: hsl(360 100% 50% / 0.122);
+            background-image: repeating-linear-gradient(-60deg, transparent, transparent 3px, #fff 3px, #fff 4px);
+            filter: url(#hand-drawn-3);
+        }
     }
 }
 
@@ -147,6 +175,7 @@ code {
 p code {
     break-inside: avoid;
     white-space: nowrap;
+    font-weight: 900;
 }
 
 ::-webkit-scrollbar {
@@ -221,7 +250,6 @@ p code {
     pointer-events: none;
     filter: url(#hand-drawn);
     z-index: 1;
-    /* Paint above the tab-bar background */
 }
 
 .code-tab {
@@ -251,9 +279,7 @@ p code {
 
 .code-tab.active {
     background: #fafafa;
-    /* Match Paper */
     z-index: 3;
-    /* Paint over the tab-bar boundary line */
     border-bottom: 2px solid #fafafa;
     margin-bottom: -2px;
 }
@@ -276,8 +302,7 @@ p code {
 
     white-space: pre;
     word-break: break-all;
-    color: #000;
-    position: relative;
+    color: black;
     z-index: 1;
     counter-reset: line;
 }
@@ -293,7 +318,7 @@ p code {
     counter-increment: line;
     content: counter(line);
     display: inline-block;
-    width: 30px;
+    width: 2rem;
     text-align: right;
     margin-right: 15px;
     color: #999;
@@ -318,12 +343,11 @@ p code {
     display: flex;
     flex-direction: column;
     padding: 1.5rem;
-    border-radius: 6px;
+    border-radius: .5rem;
     background: #fff;
     text-decoration: none;
     color: #333;
     position: relative;
-    z-index: 0;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -335,13 +359,10 @@ p code {
     border-radius: 6px;
     pointer-events: none;
     filter: url(#hand-drawn);
-    z-index: -1;
-    transition: inherit;
 }
 
 .card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .card h3 {

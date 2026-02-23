@@ -111,13 +111,20 @@ const parseCodeBlocks = (str) => {
   });
 };
 
+const parseQuotes = (str) => {
+  const regex = /^>\s*(.+?)\s*\|\s*(.+?)\s*\|[ \t]*$/gm;
+  return str.replace(regex, (match, quote, author) => {
+    return `<hand-quote author="${author.trim()}">${quote.trim()}</hand-quote>`;
+  });
+};
+
 const parseParagraphs = (str) => {
   return str
     .trim()
     .split(/\r?\n\r?\n+/)
     .filter(block => block.trim())
     .map((block) => {
-      return /^(<h|<ul|<p|<project-code|<div|<hr)/.test(block.trim())
+      return /^(<h|<ul|<p|<project-code|<div|<hr|<hand-quote|<post-meta)/.test(block.trim())
         ? block
         : `<p>${block.trim()}</p>`;
     })
@@ -131,6 +138,7 @@ const composeParser =
 
 const parseMarkdown = composeParser(
   parseMetaBlock,
+  parseQuotes,
   parseCodeBlocks,
   parseHeaders,
   parseCustomElements,

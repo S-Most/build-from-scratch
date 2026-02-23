@@ -12,19 +12,19 @@ class HandAnnotation extends HTMLElement {
           display: inline;
           position: relative;
         }
+
         .word {
           position: relative;
           display: inline-block;
           font-weight: bold;
           color: #e74c3c;
           padding: 2px 6px;
-        //   cursor: pointer;
           anchor-name: --annotation-word;
         }
 
         .highlight-circle {
           position: absolute;
-          inset: -6px -12px; /* Pull it outside the word's bounding box so it frames it with space */
+          inset: -6px -12px;
           width: calc(100% + 24px);
           height: calc(100% + 12px);
           pointer-events: none;
@@ -37,6 +37,7 @@ class HandAnnotation extends HTMLElement {
           stroke-width: 2;
           filter: url(#hand-drawn);
         }
+
         .annotation-container {
           position: absolute;
           top: 0;
@@ -46,19 +47,21 @@ class HandAnnotation extends HTMLElement {
           pointer-events: none;
           z-index: 10;
         }
+
         .annotation-text {
           position: absolute;
-          font-family: 'Comic Sans MS', 'Chalkboard SE', 'Marker Felt', 'Architects Daughter', sans-serif;
+          font-family: 'Caveat';
           color: #e74c3c;
           font-weight: bold;
-          font-size: 1.1rem;
+          font-size: 1.5rem;
           width: min-content;
           max-width: 100px;
           line-height: 1.2;
           text-align: center;
-          filter: url(#hand-drawn);
+          filter: url(#hand-drawn-3);
           rotate: -8deg;
         }
+
         svg.connector {
           position: absolute;
           top: 0;
@@ -68,6 +71,7 @@ class HandAnnotation extends HTMLElement {
           overflow: visible;
           pointer-events: none;
         }
+
         svg.connector path {
           stroke: #e74c3c;
           stroke-width: 1.5;
@@ -78,7 +82,7 @@ class HandAnnotation extends HTMLElement {
 
         @media (max-width: 1100px) {
            .annotation-container {
-             display: none; /* Hidden by default entirely on mobile */
+             display: none;
              position: absolute;
              position-anchor: --annotation-word;
              top: anchor(top);
@@ -90,7 +94,6 @@ class HandAnnotation extends HTMLElement {
              height: auto;
            }
 
-           /* Reveal when active */
            :host(.active) .annotation-container {
              display: flex;
              flex-direction: column;
@@ -118,6 +121,14 @@ class HandAnnotation extends HTMLElement {
       <!-- Local SVG filter definition so it applies inside the shadow DOM -->
       <svg style="display: none;">
         <filter id="hand-drawn" x="-8%" y="-10%" width="120%" height="120%">
+            <feTurbulence type="fractalNoise" baseFrequency="1.5" numOctaves="2" result="noise"></feTurbulence>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="5"></feDisplacementMap>
+        </filter>
+        <filter id="hand-drawn-3" x="-8%" y="-10%" width="120%" height="120%">
+            <feTurbulence type="fractalNoise" baseFrequency="1.5" numOctaves="2" result="noise"></feTurbulence>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="3"></feDisplacementMap>
+        </filter>
+        <filter id="hand-drawn-5" x="-8%" y="-10%" width="120%" height="120%">
             <feTurbulence type="fractalNoise" baseFrequency="1.5" numOctaves="2" result="noise"></feTurbulence>
             <feDisplacementMap in="SourceGraphic" in2="noise" scale="5"></feDisplacementMap>
         </filter>
@@ -164,8 +175,8 @@ class HandAnnotation extends HTMLElement {
 
   toggleMobileActive(e) {
     if (window.innerWidth <= 1100) {
-       e.stopPropagation(); // Prevent the document listener from immediately closing it
-       this.classList.toggle("active");
+      e.stopPropagation(); // Prevent the document listener from immediately closing it
+      this.classList.toggle("active");
     }
   }
 

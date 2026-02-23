@@ -13,14 +13,14 @@
 <body>
     <nav>
         <ul class="nav-links">
-            <li><a href="#/">Home</a></li>
             <li><a href="#/projects">Projects</a></li>
+            <li><a href="#/">Home</a></li>
             <li><a href="#/techniques">Techniques</a></li>
         </ul>
     </nav>
 
     <main>
-        Main Content
+        Fetching content
     </main>
 
     <footer>
@@ -43,9 +43,17 @@
         </a>
     </footer>
 
-    <!-- Filter for "handdrawn" lines -->
+    <!-- Filters for "handdrawn" lines -->
     <svg style="display: none;">
         <filter id="hand-drawn" x="-8%" y="-10%" width="120%" height="120%">
+            <feTurbulence type="fractalNoise" baseFrequency="1.5" numOctaves="2" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" />
+        </filter>
+        <filter id="hand-drawn-3" x="-8%" y="-10%" width="120%" height="120%">
+            <feTurbulence type="fractalNoise" baseFrequency="1.5" numOctaves="2" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" />
+        </filter>
+        <filter id="hand-drawn-5" x="-8%" y="-10%" width="120%" height="120%">
             <feTurbulence type="fractalNoise" baseFrequency="1.5" numOctaves="2" result="noise" />
             <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" />
         </filter>
