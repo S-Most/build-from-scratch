@@ -6,22 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Build From Scratch</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="utils/highlight.css">
     <script src="script.js" type="module"></script>
 </head>
 
 <body>
     <nav>
         <ul class="nav-links">
+            <li><a href="#/projects">Projects</a></li>
             <li><a href="#/">Home</a></li>
-            <li><a href="#/custom-parser">Custom Parser</a></li>
-            <li><a href="#/game-of-life">Game of Life</a></li>
-            <li><a href="#/sibling-index">Sibling Index</a></li>
-            <li><a href="#/ffmpeg-video-conversion">FFmpeg</a></li>
+            <li><a href="#/techniques">Techniques</a></li>
         </ul>
     </nav>
 
     <main>
-        Main Content
+        Fetching content
     </main>
 
     <footer>
@@ -44,9 +43,17 @@
         </a>
     </footer>
 
-    <!-- Filter for "handdrawn" lines -->
+    <!-- Filters for "handdrawn" lines -->
     <svg style="display: none;">
         <filter id="hand-drawn" x="-8%" y="-10%" width="120%" height="120%">
+            <feTurbulence type="fractalNoise" baseFrequency="1.5" numOctaves="2" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" />
+        </filter>
+        <filter id="hand-drawn-3" x="-8%" y="-10%" width="120%" height="120%">
+            <feTurbulence type="fractalNoise" baseFrequency="1.5" numOctaves="2" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" />
+        </filter>
+        <filter id="hand-drawn-5" x="-8%" y="-10%" width="120%" height="120%">
             <feTurbulence type="fractalNoise" baseFrequency="1.5" numOctaves="2" result="noise" />
             <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" />
         </filter>

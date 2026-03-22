@@ -112,10 +112,11 @@ const highlightJS = composeParser(
 
 export function highlight(code, language) {
     if (!code) return "";
+    let highlighted = escapeHtmlPass(code);
 
-    if (language === 'html' || language === 'htm') return highlightHTML(code);
-    if (language === 'css') return highlightCSS(code);
-    if (language === 'js' || language === 'javascript') return highlightJS(code);
+    if (language === 'html') highlighted = highlightHTML(code);
+    else if (language === 'css') highlighted = highlightCSS(code);
+    else if (language === 'js') highlighted = highlightJS(code);
 
-    return escapeHtmlPass(code);
+    return `<span class="line-num"></span>` + highlighted.replace(/\n/g, '\n<span class="line-num"></span>');
 }

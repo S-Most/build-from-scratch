@@ -1,4 +1,9 @@
-# The Magic of `sibling-index()` in CSS
+---
+title: The Magic of `sibling-index()` in CSS
+type: technique
+date: 2026-02-21
+description: Exploring dynamic staggering and layouts without JS using sibling-index().
+---
 
 For years, styling an element based on its position among its siblings required JavaScript or manually writing dozens of `:nth-child(n)` CSS rules.
 
@@ -8,7 +13,7 @@ Enter the new CSS Level 5 functions: `sibling-index()` and `sibling-count()`.
 - **`sibling-index()`**: Returns the 1-based index of the element among its siblings.
 - **`sibling-count()`**: Returns the total number of siblings.
 
-These evaluate to integers, which means you can use them inside `calc()` to perform math! 
+These evaluate to integers, which means you can use them inside `calc()` to perform math!
 
 ## Dynamic Staggering without JS
 By combining these functions with `calc()`, you can create dynamic layouts and staggering animations that automatically adjust as elements are added or removed, with zero JavaScript calculation for the layout!

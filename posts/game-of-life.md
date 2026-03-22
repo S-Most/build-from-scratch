@@ -1,4 +1,10 @@
-# Conway's Game of Life
+---
+title: Conway's Game of Life
+type: project
+date: 2026-02-21
+description: A fascinating look at how simple rules can lead to complex behaviors.
+---
+
 A fascinating look at how simple rules can lead to complex behaviors.
 
 ## The Rules
