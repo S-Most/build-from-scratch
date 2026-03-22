@@ -6,6 +6,7 @@ const routes = {
   "/game-of-life": "posts/game-of-life.md",
   "/custom-parser": "posts/custom-parser.md",
   "/sibling-index": "posts/sibling-index.md",
+  "/ffmpeg-video-conversion": "posts/ffmpeg-video-conversion.md",
 };
 
 async function navigate() {

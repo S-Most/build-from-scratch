@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FFmpeg Command Builder</title>
+    <link rel="stylesheet" href="../../shared.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <div class="demo-container">
+        <div class="builder">
+            <h3>⚡ FFmpeg Command Builder</h3>
+            <div class="options-grid">
+                <label>
+                    Input Format
+                    <select id="inputFormat">
+                        <option value="mp4">MP4</option>
+                        <option value="avi">AVI</option>
+                        <option value="mkv">MKV</option>
+                        <option value="mov">MOV</option>
+                        <option value="webm">WebM</option>
+                    </select>
+                </label>
+                <label>
+                    Output Format
+                    <select id="outputFormat">
+                        <option value="mp4">MP4</option>
+                        <option value="webm">WebM</option>
+                        <option value="mkv">MKV</option>
+                        <option value="avi">AVI</option>
+                        <option value="gif">GIF</option>
+                        <option value="mp3">MP3 (audio)</option>
+                    </select>
+                </label>
+                <label>
+                    Video Codec
+                    <select id="videoCodec">
+                        <option value="auto">Auto</option>
+                        <option value="libx264">H.264 (libx264)</option>
+                        <option value="libx265">H.265 (libx265)</option>
+                        <option value="libvpx-vp9">VP9 (libvpx-vp9)</option>
+                        <option value="copy">Copy (no re-encode)</option>
+                    </select>
+                </label>
+                <label>
+                    Audio Codec
+                    <select id="audioCodec">
+                        <option value="auto">Auto</option>
+                        <option value="aac">AAC</option>
+                        <option value="libopus">Opus</option>
+                        <option value="libmp3lame">MP3</option>
+                        <option value="copy">Copy (no re-encode)</option>
+                        <option value="none">No Audio (-an)</option>
+                    </select>
+                </label>
+                <label>
+                    Quality (CRF)
+                    <select id="quality">
+                        <option value="">Default</option>
+                        <option value="18">18 — Visually Lossless</option>
+                        <option value="23">23 — Good (default)</option>
+                        <option value="28">28 — Compressed</option>
+                        <option value="35">35 — Low Quality</option>
+                    </select>
+                </label>
+                <label>
+                    Preset
+                    <select id="preset">
+                        <option value="">Default</option>
+                        <option value="ultrafast">ultrafast</option>
+                        <option value="fast">fast</option>
+                        <option value="medium">medium</option>
+                        <option value="slow">slow</option>
+                        <option value="veryslow">veryslow</option>
+                    </select>
+                </label>
+                <label>
+                    Resolution
+                    <select id="resolution">
+                        <option value="">Original</option>
+                        <option value="1920x1080">1920×1080 (1080p)</option>
+                        <option value="1280x720">1280×720 (720p)</option>
+                        <option value="854x480">854×480 (480p)</option>
+                        <option value="640x360">640×360 (360p)</option>
+                    </select>
+                </label>
+                <label>
+                    Framerate
+                    <select id="framerate">
+                        <option value="">Original</option>
+                        <option value="60">60 fps</option>
+                        <option value="30">30 fps</option>
+                        <option value="24">24 fps</option>
+                        <option value="15">15 fps</option>
+                    </select>
+                </label>
+            </div>
+        </div>
+
+        <div class="terminal">
+            <div class="terminal-header">
+                <span class="terminal-dot red"></span>
+                <span class="terminal-dot yellow"></span>
+                <span class="terminal-dot green"></span>
+                <span class="terminal-title">Terminal</span>
+                <button id="copyBtn" title="Copy command">📋</button>
+            </div>
+            <div class="terminal-body">
+                <div class="prompt-line">
+                    <span class="prompt">$</span>
+                    <span id="command" class="command-text"></span>
+                </div>
+                <div id="output" class="output"></div>
+            </div>
+            <div class="terminal-actions">
+                <button id="runBtn">▶ Run</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

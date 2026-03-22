@@ -26,8 +26,6 @@ But the journey is just beginning. In the near future, I will be tackling even m
 
 Dive in, explore the source code, and start building!
 
----
-
 ### Highlighting Code
 Here is a live example of the custom `<project-code>` web component you'll be using across the site, showcasing the code for our bespoke Regex parser:
 [code files="html-parser.js,css-parser.js,js-parser.js,helpers.js" path="/demos/custom-parser/" hide-result="true"]
